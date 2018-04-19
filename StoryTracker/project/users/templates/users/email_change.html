@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% set title = 'Change Email' %}
+ 
+{% block post_quote %}
+ 
+<div class="user-profile">
+  <div class="page-header">
+    <h2>Email Change</h2>
+  </div>
+ 
+  <h3>Current Email: {{ current_user.email }}</h3>
+  <h3>Please enter your new email:</h3>
+  <form action="{{ url_for('users.user_email_change') }}" method="POST">
+  {{ form.hidden_tag() }}
+    <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=64) }}<br>
+            {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+
+    
+  </form>
+</div>
+ 
+{% endblock %}
+
+
+

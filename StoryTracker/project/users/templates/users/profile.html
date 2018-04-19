@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% set title = 'User Profile' %}
+
+{% block post_quote %}
+    {% if current_user %}
+        <h3>Welcome {{ current_user.email }}!</h3>
+    {% else %}
+        <h3>Welcome!</h3>
+    {% endif %}
+{% endblock %}
