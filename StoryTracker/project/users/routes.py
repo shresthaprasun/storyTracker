@@ -326,13 +326,9 @@ def user_email_change():
 @users_blueprint.route('/password_change', methods=["GET", "POST"])
 @login_required
 def user_password_change():
-    print ("Test 1")
     form = PasswordForm()
-    print ("Test 2")
     if request.method == 'POST':
-        print ("Test 3")
         if form.validate_on_submit():
-            print ("Test 4")
             user = current_user
             user.set_password(form.password.data)
             db.session.add(user)

@@ -56,11 +56,13 @@ def initialize_extensions(app):
 def register_blueprints(app):
     # Since the application instance is now created, register each Blueprint
     # with the Flask application instance (app)
-    # from project.recipes import recipes_blueprint
+    
     from project.users import users_blueprint
+    from project.storys import story_blueprint
 
-    # app.register_blueprint(recipes_blueprint)
+    
     app.register_blueprint(users_blueprint)
+    app.register_blueprint(story_blueprint)
 
 
 
@@ -77,11 +79,11 @@ Bootstrap(app)
 
 
 
-from project.models import User
+from project.models import User, Story
 
 admin = Admin(app, name='app', template_mode='bootstrap3')
 admin.add_view(ModelView(User, db.session))
-
+admin.add_view(ModelView(Story, db.session))
 # with app.app_context():
 #     db.init_app(app)
 

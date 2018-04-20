@@ -1,4 +1,4 @@
-from flask import g
+from flask import g, url_for
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View, Subgroup, Link, Text, Separator
 from flask_bootstrap import __version__ as FLASK_BOOTSTRAP_VERSION
@@ -22,14 +22,14 @@ nav = Nav()
 def usernavbar():
     return Navbar(
         'Story Tracker',
-        View('Home', '.index'),
-        View(g.user.username, '.profile'),
-        View('Meet N Eat', '.index'),
-        View('Notification', '.index'),
-        View('Analytics', '.index'),
-        View('For Business', '.index'),
-        View('History', '.index'),
-        View('Logout', '.logout'),
+        View('Home', 'users.index'),
+        View(g.user.username, 'users.profile'),
+        View('Story', 'storys.story'),
+        View('Notification', 'users.index'),
+        View('Analytics', 'users.index'),
+        View('For Business', 'users.index'),
+        View('History', 'users.index'),
+        View('Logout', 'users.logout'),
     )
 
 

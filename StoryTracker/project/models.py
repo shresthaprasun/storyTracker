@@ -81,3 +81,33 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.email)
+
+
+
+
+
+
+class Story(db.Model):
+    """
+    Class that represents a news/story of the application
+
+    The following attributes of a story are stored in this table:
+        title
+        description
+        videos
+        images
+    """
+    __tablename__ = 'stories'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String, unique=True, nullable=False)
+    description = db.Column(db.String, unique=True, nullable=True)
+
+
+    def __repr__(self):
+        return '<Story {}>'.format(self.title)
+
+
+
+
+

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% set title = 'Create Story' %}
+
+{% block post_quote %}
+
+<h1>Hello Worlds from story</h1>
+<form action="" method="post">
+        {{ createStoryForm.hidden_tag() }}
+        <p>
+            {{ createStoryForm.title.label }}<br>
+            {{ createStoryForm.title(size=64) }}<br>
+            {% for error in createStoryForm.title.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ createStoryForm.description.label }}<br>
+            {{ createStoryForm.description(size=500) }}<br>
+            {% for error in createStoryForm.description.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+       
+        <p>{{ createStoryForm.submit() }}</p>
+    </form>
+{% endblock post_quote %}
