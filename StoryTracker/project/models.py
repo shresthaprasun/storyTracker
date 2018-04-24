@@ -14,6 +14,19 @@ class ValidationError(ValueError):
     """
     pass
 
+# Association table for user follow story Many to Many relation
+class User_Story(db.Model):
+    __tablename__ = 'users_stories'
+
+    # id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    story_id = db.Column(db.Integer, db.ForeignKey('stories.id'), primary_key=True)
+    # extra_data = Column(String(50))
+
+    users = db.relationship("User", backref="stories_association")
+    Stories = db.relationship("Story", backref="users_association")
+
+
 
 
 
@@ -41,6 +54,12 @@ class User(db.Model):
     email_confirmation_sent_on = db.Column(db.DateTime, nullable=True)
     email_confirmed = db.Column(db.Boolean, nullable=True, default=False)
     email_confirmed_on = db.Column(db.DateTime, nullable=True)
+
+    stories = db.relationship('Story', backref='author', lazy='dynamic')
+
+    stories_followed = db.relationship('Story',secondary="users_stories", lazy='dynamic')
+
+
 
     def __init__(self,username, email, plaintext_password,birth_date, role='user',email_confirmation_sent_on=None):
         self.username = username
@@ -102,6 +121,19 @@ class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String, unique=True, nullable=False)
     description = db.Column(db.String, unique=True, nullable=True)
+    created_on = db.Column(db.DateTime, nullable=False)
+    date_of_completion = db.Column(db.DateTime, nullable=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+     
+
+
+    def __init__(self, title, description, date_of_completion, author_id):
+        self.title = title
+        self.description = description
+        self.created_on = datetime.now()
+        self.date_of_completion = date_of_completion;
+        self.author_id = author_id
 
 
     def __repr__(self):

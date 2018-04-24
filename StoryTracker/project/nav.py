@@ -22,13 +22,13 @@ nav = Nav()
 def usernavbar():
     return Navbar(
         'Story Tracker',
-        View('Home', 'users.index'),
+        View('Home', 'storys.index'),
         View(g.user.username, 'users.profile'),
         View('Story', 'storys.story'),
-        View('Notification', 'users.index'),
-        View('Analytics', 'users.index'),
-        View('For Business', 'users.index'),
-        View('History', 'users.index'),
+        View('Notification', 'storys.index'),
+        View('Analytics', 'storys.index'),
+        View('For Business', 'storys.index'),
+        View('History', 'storys.index'),
         View('Logout', 'users.logout'),
     )
 
@@ -37,10 +37,10 @@ def usernavbar():
 def homenavbar():
     return Navbar(
         'Story Tracker',
-        View('Flask-Bootstrap', '.index'),
-        View('Home', '.index'),
-        View('Register', '.register'),
-        View('Login', '.login'),
+        View('Flask-Bootstrap', 'storys.index'),
+        View('Home', 'storys.index'),
+        View('Register', 'users.register'),
+        View('Login', 'users.login'),
         # View('Forms Example', '.example_form'),
         # View('Debug-Info', 'debug.debug_root'),
         Subgroup(

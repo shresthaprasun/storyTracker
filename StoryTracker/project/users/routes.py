@@ -95,9 +95,9 @@ def send_password_reset_email(user_email):
 #### routes ####
 ################
 
-@users_blueprint.route('/')
-def index():
-    return render_template('users/index.html')
+# @users_blueprint.route('/')
+# def index():
+#     return render_template('users/index.html')
 
 
 @users_blueprint.route('/profile')
@@ -197,7 +197,7 @@ def confirm_email(token):
         db.session.commit()
         flash('Thank you for confirming your email address!')
  
-    return redirect(url_for('users.index'))
+    return redirect(url_for('stories.index'))
 
 
 # Oauth 
@@ -217,7 +217,7 @@ def oauth_callback(provider):
     social_id, username, email = oauth.callback()
     if social_id is None:
         flash('Authentication failed.')
-        return redirect(url_for('users.index'))
+        return redirect(url_for('stories.index'))
     user = User.query.filter_by(email=email).first()
     if user and user.is_correct_password(social_id):
         user.authenticated = True

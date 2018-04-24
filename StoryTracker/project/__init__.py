@@ -79,11 +79,12 @@ Bootstrap(app)
 
 
 
-from project.models import User, Story
+from project.models import User, Story, User_Story
 
 admin = Admin(app, name='app', template_mode='bootstrap3')
 admin.add_view(ModelView(User, db.session))
 admin.add_view(ModelView(Story, db.session))
+admin.add_view(ModelView(User_Story, db.session))
 # with app.app_context():
 #     db.init_app(app)
 

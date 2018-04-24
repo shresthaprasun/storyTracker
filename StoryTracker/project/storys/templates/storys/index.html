@@ -5,23 +5,35 @@
 {% block post_quote %}
 
 <h1>Hello Worlds from story</h1>
-<form action="" method="post">
-        {{ createStoryForm.hidden_tag() }}
-        <p>
-            {{ createStoryForm.title.label }}<br>
-            {{ createStoryForm.title(size=64) }}<br>
-            {% for error in createStoryForm.title.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ createStoryForm.description.label }}<br>
-            {{ createStoryForm.description(size=500) }}<br>
-            {% for error in createStoryForm.description.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-       
-        <p>{{ createStoryForm.submit() }}</p>
-    </form>
+
+{% for story in stories  %}
+
+<div class="col-md-12 rounded">
+	<div class="row">
+		<div>
+			<h1>{{story.title}}</h1>
+			<p>{{story.created_on}}   {{story.date_of_completion}}</p>
+			{{story.author.username}} writes: <br>
+			{{story.description}}
+		</div>
+		<div>
+			{% for user in story.users_association %}
+			<ul>
+				<li>{{user.users.username}}</li>
+			</ul>
+			{% endfor %}
+		</div>
+		<div class="col-md-4 rounded">
+			<a class="btn btn-primary" href="#" role="button">Like</a>
+		</div>
+		<div class="col-md-4 rounded">
+		<a class="btn btn-secondary" href="#" role="button">Dislike</a>
+		</div>
+		<div class="col-md-4 rounded">
+		<a class="btn btn-primary" href="{{url_for('storys.follow_story', story_id = story.id)}}" role="button">Follow</a>
+		</div>
+	</div>
+
+</div>
+{% endfor %}
 {% endblock post_quote %}

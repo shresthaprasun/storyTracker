@@ -37,6 +37,15 @@
         {% else %}
           <div class="panel-body">Email has not been confirmed!</div>
         {% endif %}
+
+
+        <div class="panel panel-info">
+        <div class="panel-heading">Followed Stories</div>
+        {% for story in current_user.stories_followed %}
+        <div class="panel-body">Title: {{ story.title }}</div>
+        {%  endfor %}
+      </div>
+
       </div>
     </div>
   </div>
